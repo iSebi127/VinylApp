@@ -1,0 +1,185 @@
+.player-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 72px;
+  background: rgba(12,12,18,0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  z-index: 1000;
+  box-shadow: 0 -4px 30px rgba(0,0,0,0.4);
+}
+
+.player-bar__vinyl {
+  flex-shrink: 0;
+}
+
+.player-bar__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.player-bar__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+}
+
+.player-bar__artist {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.player-bar__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+  padding: 0;
+}
+
+.ctrl-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ctrl-btn:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+.play-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--accent, #e94560);
+  color: #fff;
+}
+
+.play-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.play-btn:hover {
+  background: var(--accent, #e94560);
+  filter: brightness(1.15);
+}
+
+.player-bar__progress {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.time-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  font-variant-numeric: tabular-nums;
+  width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.progress-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress-track:hover .progress-thumb { opacity: 1; }
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent, #e94560);
+  border-radius: 2px;
+  transition: width 0.25s linear;
+}
+
+.progress-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.player-bar__volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  color: rgba(255,255,255,0.4);
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  width: 80px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.15);
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent, #e94560);
+}
+
+/* Loop button visuals */
+.loop-btn {
+  width: 36px;
+  height: 36px;
+}
+
+.loop-btn svg { width: 16px; height: 16px; }
+
+.loop-btn.active {
+  background: var(--accent, #e94560);
+  color: #fff;
+}
+
+.loop-btn.active svg { filter: none; }
+
+.loop-btn:not(.active) svg { opacity: 0.75; }

@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: musicapp-backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:/data/musicdb;DB_CLOSE_ON_EXIT=FALSE
+      - APP_UPLOAD_DIR=/uploads
+      - APP_BASE_URL=http://localhost:8080
+    volumes:
+      - uploads_data:/uploads
+      - db_data:/data
+    ports:
+      - "8080:8080"
+    networks:
+      - musicapp-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_URL=http://localhost:8080
+    container_name: musicapp-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - musicapp-net
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  uploads_data:
+    driver: local
+  db_data:
+    driver: local
+
+networks:
+  musicapp-net:
+    driver: bridge
